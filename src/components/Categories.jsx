@@ -1,6 +1,7 @@
 import wholespices from "../assets/wholespices.jpeg";
 import groundmasala from "../assets/groundmasala.jpeg";
 import organicspices from "../assets/organicspices.jpg.webp";
+
 function Categories() {
   const categories = [
     { title: "Whole Spices", img: wholespices },
@@ -9,19 +10,57 @@ function Categories() {
   ];
 
   return (
-    <section className="max-w-8xl bg-yellow-100/20 mx-auto px-6 py-20">
-      <h3 className="text-2xl font-bold mb-2">Shop by Category</h3>
-<h4 className="text-1xl mb-10">Explore our curated collections of exotix aromatics</h4>
-      <div className="grid md:grid-cols-3 gap-8">
-        {categories.map((cat, i) => (
-          <div key={i} className="relative rounded-xl overflow-hidden group">
-            <img src={cat.img} className="h-72 w-full object-cover group-hover:scale-110 transition duration-500" />
-            <div className="absolute inset-0 bg-black/40"></div>
-            <h4 className="absolute bottom-4 left-4 text-white text-lg font-semibold">
-              {cat.title}
-            </h4>
+    <section className="bg-[#f5f3ee] py-10 md:py-20">
+
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
+
+        {/* Header */}
+        <div className="flex justify-between items-center mb-6 md:mb-10">
+
+          <div>
+            <h3 className="text-xl md:text-2xl font-bold">
+              Shop by Category
+            </h3>
+            <p className="text-sm md:text-base text-gray-500 mt-1">
+              Explore our curated collections of exotic aromatics
+            </p>
           </div>
-        ))}
+
+          {/* ✅ Responsive View All */}
+          <button className="text-yellow-600 text-sm md:text-base font-medium whitespace-nowrap">
+            View All →
+          </button>
+
+        </div>
+
+        {/* ✅ Always 3 in one row */}
+        <div className="grid grid-cols-3 gap-3 md:gap-8">
+
+          {categories.map((cat, i) => (
+            <div
+              key={i}
+              className="relative rounded-2xl md:rounded-3xl overflow-hidden group shadow-sm hover:shadow-md transition"
+            >
+
+              {/* Image */}
+              <img
+                src={cat.img}
+                className="h-28 md:h-72 w-full object-cover group-hover:scale-105 transition duration-500"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/30 md:bg-black/40"></div>
+
+              {/* Title */}
+              <h4 className="absolute bottom-2 left-2 md:bottom-4 md:left-4 text-white text-xs md:text-lg font-semibold">
+                {cat.title}
+              </h4>
+
+            </div>
+          ))}
+
+        </div>
+
       </div>
     </section>
   );
