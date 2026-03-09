@@ -7,7 +7,7 @@ const CTA = () => {
           Taste the Difference of Direct Sourcing
         </h2>
 
-        <p className="mt-4 text-yellow-500 w-122 mx-auto">
+        <p className="mt-4 text-yellow-500 md:w-122 mx-auto">
           Join us in supporting sustainable farms and bringing flavors back to your dining table.
         </p>
 

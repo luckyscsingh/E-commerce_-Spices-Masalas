@@ -42,7 +42,7 @@ const Journey = () => {
 
 
         {/* IMAGE GRID */}
-        <div className="hidden md:grid grid-cols-2 gap-6 auto-rows-[150px]">
+        <div className="grid grid-cols-2 gap-6 auto-rows-[150px]">
 
           {/* Image 1 */}
           <img

@@ -39,14 +39,14 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-4">Join Our Newsletter</h3>
 
-          <div className="flex border rounded-lg overflow-hidden">
+          <div className="flex flex-col lg:flex-row gap-3">
             <input
               type="email"
               placeholder="Enter email"
-              className="w-full px-3 py-2 text-white outline-none"
+              className="w-full px-3 py-2 text-white border rounded-lg outline-none"
             />
 
-            <button className="bg-yellow-500 px-4 font-medium">
+            <button className="bg-yellow-500 rounded-lg px-4 font-medium">
               Subscribe
             </button>
           </div>
