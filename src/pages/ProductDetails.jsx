@@ -78,7 +78,7 @@ export default function ProductDetails() {
             <Link to="/products" className="text-yellow-600 font-semibold">
               Products
             </Link>
-            <Link to="#">Recipes</Link>
+            <Link to="/recipes">Recipes</Link>
             <Link to="/our-story">About</Link>
           </nav>
 
