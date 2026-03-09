@@ -79,7 +79,7 @@ export default function ProductDetails() {
               Products
             </Link>
             <Link to="#">Recipes</Link>
-            <Link to="#">About</Link>
+            <Link to="/our-story">About</Link>
           </nav>
 
           <div className="flex items-center gap-4">

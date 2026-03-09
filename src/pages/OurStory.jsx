@@ -25,7 +25,7 @@ function OurStory() {
             <Navbar />
 
             {/* HERO */}
-            <section className="relative h-[90vh]">
+            <section id="about" className="relative h-[90vh]">
                 <img src={aboutmain1} className="absolute inset-0 w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-black/50" />
                 <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex flex-col justify-center text-white">
