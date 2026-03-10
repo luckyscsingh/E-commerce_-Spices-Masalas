@@ -1,67 +1,112 @@
-const Footer = () => {
+import { FaGlobe, FaShareAlt, FaAt } from "react-icons/fa";
+
+function Footer() {
   return (
-    <footer className="bg-[#0B1A3A] text-white pt-14 pb-8">
+    <footer className="bg-[#0f172a] text-gray-300 pt-14 pb-8">
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-10">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
-        {/* Brand */}
-        <div>
-          <h2 className="font-bold text-lg mb-4">🌶️ Spices & Masalas</h2>
-          <p className="text-gray-300 text-sm">
-            Crafting heritage flavors from trusted farms and bringing
-            authentic spices to your kitchen.
-          </p>
-        </div>
+        {/* ================= TOP GRID ================= */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
 
-        {/* Quick Links */}
-        <div>
-          <h3 className="font-semibold mb-4">Quick Links</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li>Our Farms</li>
-            <li>Organic Promise</li>
-            <li>Wholesale</li>
-            <li>Spice Blog</li>
-          </ul>
-        </div>
-
-        {/* Customer Care */}
-        <div>
-          <h3 className="font-semibold mb-4">Customer Care</h3>
-          <ul className="space-y-2 text-gray-300 text-sm">
-            <li>Shipping Policy</li>
-            <li>Returns & Refunds</li>
-            <li>Track Order</li>
-            <li>FAQs</li>
-          </ul>
-        </div>
-
-        {/* Newsletter */}
-        <div>
-          <h3 className="font-semibold mb-4">Join Our Newsletter</h3>
-
-          <div className="flex flex-col lg:flex-row gap-3">
-            <input
-              type="email"
-              placeholder="Enter email"
-              className="w-full px-3 py-2 text-white border rounded-lg outline-none"
-            />
-
-            <button className="bg-yellow-500 rounded-lg px-4 font-medium">
-              Subscribe
-            </button>
+          {/* Column 1 */}
+          <div>
+            <h4 className="text-white font-semibold text-lg mb-4">
+              Spices & Masalas
+            </h4>
+            <p className="text-sm text-gray-400 leading-relaxed">
+              Bringing the soul of Indian kitchens to the world.
+              Quality you can taste, aroma you can feel.
+            </p>
           </div>
+          {/* Column 2 & 3 Wrapper */}
+          <div className="grid grid-cols-2 gap-6 md:col-span-2">
 
+            {/* Quick Links */}
+            <div>
+              <h4 className="text-white font-medium mb-4">
+                Quick Links
+              </h4>
+              <ul className="space-y-2 text-sm">
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Our Story
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Sustainability
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Recipes Blog
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Wholesale
+                </li>
+              </ul>
+            </div>
+
+            {/* Support */}
+            <div>
+              <h4 className="text-white font-medium mb-4">
+                Support
+              </h4>
+              <ul className="space-y-2 text-sm">
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Shipping Info
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Returns & Refunds
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  FAQs
+                </li>
+                <li className="hover:text-yellow-400 transition cursor-pointer">
+                  Contact Us
+                </li>
+              </ul>
+            </div>
+
+          </div>
+          {/* Column 4 - Newsletter + Social */}
+          <div>
+            <h4 className="text-white font-medium mb-4">
+              Stay Updated
+            </h4>
+
+            {/* Newsletter */}
+            <div className="flex items-center bg-slate-800 rounded-full overflow-hidden mb-5">
+              <input
+                type="email"
+                placeholder="Your email"
+                className="bg-transparent px-4 py-2 text-sm w-full outline-none text-gray-300"
+              />
+              <button className="bg-yellow-500 px-4 py-2 text-sm text-black font-semibold hover:bg-yellow-600 transition">
+                Join
+              </button>
+            </div>
+
+            {/* Social Icons */}
+            <div className="flex gap-3">
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 hover:bg-yellow-500 hover:text-black transition cursor-pointer">
+                <FaGlobe size={14} />
+              </div>
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 hover:bg-yellow-500 hover:text-black transition cursor-pointer">
+                <FaShareAlt size={14} />
+              </div>
+              <div className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-800 hover:bg-yellow-500 hover:text-black transition cursor-pointer">
+                <FaAt size={14} />
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* ================= DIVIDER ================= */}
+        <div className="border-t border-slate-700 mt-10 pt-6 text-center text-xs text-gray-500">
+          © 2024 Spices & Masalas Co. Crafted for authentic flavor.
         </div>
 
       </div>
-
-      {/* Bottom */}
-      <div className="text-center text-gray-400 text-sm mt-10">
-        © 2026 Spices & Masalas. All rights reserved.
-      </div>
-
     </footer>
   );
-};
+}
 
 export default Footer;

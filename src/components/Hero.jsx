@@ -1,38 +1,70 @@
-import heroImage from "../assets/images/spices-hero.webp";
+import heroImg from "../assets/Hero.jpg.avif";
 
-const Hero = () => {
+function Hero() {
   return (
-    <section className="relative w-full h-[50vh] md:h-[70vh]">
+    <section className="bg-[#f5f3ee] md:bg-black">
 
-      {/* Background Image */}
-      <img
-        src={heroImage}
-        className="absolute inset-0 w-full h-full object-cover"
-        alt="Spices hero"
-      />
+      <div className="max-w-7xl mx-auto md:max-w-none px-4 md:px-0">
 
-      {/* Optional overlay for better text visibility */}
-      <div className="absolute inset-0 bg-black/30"></div>
+        {/* Hero Container */}
+        <div className="relative h-[320px] sm:h-[360px] md:h-[720px] md:rounded-none rounded-3xl overflow-hidden">
 
-      {/* Hero Text */}
-      <div className="px-4 absolute bottom-10 md:left-10 max-w-7xl mx-auto text-white">
-        <span className="text-yellow-500 text-md mb-2 block">
-          SINCE 1984
-        </span>
+          {/* Background Image */}
+          <img
+            src={heroImg}
+            alt="Indian Spices"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
 
-        <h1 className="text-2xl md:text-6xl font-bold leading-tight mb-3 max-w-xl">
-          Sourcing the Soul of Every Kitchen
-        </h1>
+          {/* ✅ Strong Cinematic Gradient Overlay (Like Image) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/60"></div>
 
-        <p className="mt-4 text-sm md:text-lg max-w-xl text-gray-100">
-          From the sun-soaked fields of Kerala to the high altitudes of the
-          Himalayas, we bring you the purest harvest directly from the hands
-          that nurture them.
-        </p>
+          {/* Content */}
+          <div className="relative z-10 flex flex-col justify-end md:justify-center items-start md:items-center h-full text-white p-5 md:px-6 md:text-center">
+
+            {/* Premium Badge */}
+            <span className="text-yellow-400 text-[10px] md:text-sm px-5 py-2 rounded-full mb-4 
+              bg-yellow-500/10 border border-yellow-400/40 
+              w-fit md:mx-auto tracking-[2px] uppercase font-medium">
+              Premium Quality
+            </span>
+
+            {/* ✅ Heading (Exact Bold Look) */}
+            <h2 className="text-xl sm:text-2xl md:text-7xl font-extrabold leading-tight md:leading-[1.05] tracking-tight">
+              Pure & Authentic <br />
+              <span className="text-yellow-500 font-extrabold">
+                Indian Spices
+              </span>
+            </h2>
+
+            {/* Description */}
+            <p className="max-w-sm md:max-w-2xl mt-3 md:mt-6 text-gray-300 text-xs sm:text-sm md:text-lg md:mx-auto leading-relaxed">
+              Experience the rich heritage of Indian flavors delivered to your doorstep.
+              Sourced directly from local farmers across the subcontinent.
+            </p>
+
+            {/* Buttons */}
+            <div className="mt-5 md:mt-10 flex flex-row gap-3 md:gap-6 md:justify-center">
+
+              <button className="flex-1 md:flex-none md:px-10 md:py-4 bg-yellow-500 text-black hover:bg-yellow-600 px-5 py-2.5 rounded-full font-semibold transition text-sm md:text-lg shadow-xl">
+                Shop Now
+              </button>
+
+              <button className="flex-1 md:flex-none md:px-10 md:py-4 rounded-full 
+                bg-white/10 backdrop-blur-md 
+                border border-white/30 
+                hover:bg-white/20 transition text-sm md:text-lg">
+                View Recipes
+              </button>
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
-
     </section>
   );
-};
+}
 
 export default Hero;
