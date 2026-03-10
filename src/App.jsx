@@ -1,17 +1,13 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import About from "./pages/About";
+import { Routes, Route, Navigate } from "react-router-dom";
+import AdminRoutes from "./routes/AdminRoutes";
+import AddProduct from "./admin/pages/AddProduct";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-
-        <Route path="/" element={<Home/>}/>
-        <Route path="/about" element={<About />} />
-
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route path="/admin/*" element={<AdminRoutes />} />
+      <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+    </Routes>
   );
 }
 
