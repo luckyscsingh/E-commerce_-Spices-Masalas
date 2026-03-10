@@ -1,4 +1,6 @@
 import { Truck, Package, Wallet, Smartphone } from "lucide-react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 import cardamom from "../assets/greencardamom.jpg";
 import redchilli from "../assets/redchillipowder.jpg.webp";
 
@@ -7,19 +9,7 @@ export default function CheckoutPage() {
     <div className="bg-yellow-100/20 min-h-screen text-gray-900 flex flex-col">
 
       {/* ================= HEADER ================= */}
-      <header className="border-b border-yellow-400/40 bg-yellow-100/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-          <h1 className="text-xl sm:text-2xl font-bold text-yellow-600">
-            SpiceHaven
-          </h1>
-
-          <nav className="hidden md:flex gap-8 text-gray-600">
-            <a href="/spices">Shop</a>
-            <a href="/recipes">Recipes</a>
-            <a href="/our-story">About</a>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* ================= MAIN ================= */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-12 grid lg:grid-cols-3 gap-12 flex-grow">
@@ -196,9 +186,7 @@ export default function CheckoutPage() {
       </div>
 
       {/* ================= FOOTER ================= */}
-      <footer className="border-t border-yellow-400/30 py-6 text-center text-gray-500 text-sm">
-        © 2024 SpiceHaven Artisanal Spices. All Rights Reserved.
-      </footer>
+    <Footer/>
     </div>
   );
 }

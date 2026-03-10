@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Star, ShoppingCart, Truck, RotateCcw, Lock, Search } from "lucide-react";
 import { useCart } from "../context/CartContext";
 import { Link } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 import mainImg from "../assets/kashmirisaffron.jpg.avif";
 import thumb1 from "../assets/kashmirisaffron.jpg.avif";
@@ -35,56 +37,7 @@ export default function KashmiriSaffronDetails() {
     <div className="bg-yellow-100/20 min-h-screen">
 
       {/* ================= NAVBAR ================= */}
-      <header className="bg-yellow-50 backdrop-blur-sm sticky top-0 z-50 border-b border-yellow-100/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center shadow-sm">
-              <span className="text-black text-lg font-semibold">✿</span>
-            </div>
-            <h1 className="text-lg font-semibold text-gray-800 tracking-wide">
-              Kashmiri Saffron
-            </h1>
-          </div>
-
-          {/* Center Nav */}
-          <nav className="hidden md:flex items-center gap-10 text-sm font-medium">
-            <Link to="/products" className="text-yellow-700 font-semibold">
-              Shop
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900 transition">
-              Sourcing
-            </Link>
-            <Link to="#" className="text-gray-600 hover:text-gray-900 transition">
-              Health Benefits
-            </Link>
-          </nav>
-
-          {/* Right Icons */}
-          <div className="flex items-center gap-4">
-
-            {/* Search */}
-            <button className="w-10 h-10 rounded-full border border-yellow-300/40 flex items-center justify-center hover:bg-yellow-200/30 transition">
-              <Search size={18} className="text-gray-700" />
-            </button>
-
-            {/* Cart */}
-            <Link to="/cart" className="relative">
-              <div className="w-10 h-10 rounded-full border border-yellow-300/40 flex items-center justify-center hover:bg-yellow-200/30 transition">
-                <ShoppingCart size={18} className="text-gray-700" />
-              </div>
-
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-yellow-500 text-black text-[11px] font-semibold px-1.5 py-0.5 rounded-full">
-                  {cartCount}
-                </span>
-              )}
-            </Link>
-
-          </div>
-        </div>
-      </header>
+     <Navbar/>
 
       {/* ================= MAIN SECTION ================= */}
       <section className="w-full bg-yellow-100/20 py-16">
@@ -293,39 +246,7 @@ export default function KashmiriSaffronDetails() {
           </div>
         </div>
       </section>
-      <footer className="bg-yellow-200/20 py-16 ">
-        <div className="max-w-4xl mx-auto text-center px-6">
-
-          {/* Logo + Name */}
-          <div className="flex justify-center items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-yellow-500 rounded-full flex items-center justify-center">
-              <span className="text-black text-lg">✿</span>
-            </div>
-            <h2 className="text-xl font-semibold text-gray-800">
-              Kashmiri Saffron
-            </h2>
-          </div>
-
-          {/* Copyright */}
-          <p className="text-gray-500 text-sm mb-8">
-            © 2024 Kashmiri Saffron Co. All rights reserved.
-            Sourced with love from the Himalayas.
-          </p>
-
-          {/* Links */}
-          <div className="flex justify-center gap-8 text-gray-500 text-sm">
-            <a href="#" className="hover:text-gray-800 transition">
-              Privacy Policy
-            </a>
-            <a href="#" className="hover:text-gray-800 transition">
-              Terms of Service
-            </a>
-            <a href="#" className="hover:text-gray-800 transition">
-              Contact Us
-            </a>
-          </div>
-        </div>
-      </footer>
+     <Footer/>
     </div>
   );
 }

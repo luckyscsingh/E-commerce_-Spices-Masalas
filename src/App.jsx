@@ -10,22 +10,38 @@ import CheckoutPage from "./pages/CheckoutPage";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import AdminRoutes from "./routes/AdminRoutes.jsx";
+
 function App() {
   return (
     <Router>
+
       <Routes>
-        <Route element={<Layout />}></Route>
-        <Route path="/" element={<Home />} />
-        <Route path="/our-story" element={<OurStory />} />
-        <Route path="/spices" element={<ProductDetails />} />
-        <Route path="/recipes" element={<RecipesPage />} />
-        <Route path="/product/6" element={<KashmiriSaffronDetails />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/products" element={<ProductDetails />} />
-        <Route path="/checkout" element={<CheckoutPage />} />
+
+        {/* USER WEBSITE ROUTES */}
+
+        <Route element={<Layout />}>
+
+          <Route path="/" element={<Home />} />
+          <Route path="/our-story" element={<OurStory />} />
+          <Route path="/spices" element={<ProductDetails />} />
+          <Route path="/recipes" element={<RecipesPage />} />
+          <Route path="/product/6" element={<KashmiriSaffronDetails />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/products" element={<ProductDetails />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+
+        </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        {/* ADMIN ROUTES */}
+
+        <Route path="/admin/*" element={<AdminRoutes />} />
+
       </Routes>
+
     </Router>
   );
 }
