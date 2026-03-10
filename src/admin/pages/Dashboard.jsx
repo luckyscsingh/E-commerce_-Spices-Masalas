@@ -1,5 +1,6 @@
 import AdminLayout from "../layout/AdminLayout";
 import StatCard from "../components/StatCard";
+import { Truck } from "lucide-react";
 
 function Dashboard() {
   return (
@@ -20,6 +21,7 @@ function Dashboard() {
           value="1,240"
           change="+2.4%"
           color="text-green-500"
+          Icon={Truck}
         />
 
         <StatCard
