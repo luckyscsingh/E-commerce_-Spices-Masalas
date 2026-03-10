@@ -1,6 +1,6 @@
 import AdminLayout from "../layout/AdminLayout";
 import StatCard from "../components/StatCard";
-import { Truck } from "lucide-react";
+import { AlertTriangle, ClipboardCheck, FileText, Users} from "lucide-react";
 
 function Dashboard() {
   return (
@@ -20,29 +20,28 @@ function Dashboard() {
           title="Total Products"
           value="1,240"
           change="+2.4%"
-          color="text-green-500"
-          Icon={Truck}
+          Icon={ClipboardCheck}
         />
 
         <StatCard
           title="Total Orders"
           value="856"
           change="+12.5%"
-          color="text-green-500"
+          Icon={FileText}
         />
 
         <StatCard
           title="Total Customers"
           value="3,120"
           change="+5.2%"
-          color="text-green-500"
+          Icon={Users}
         />
 
         <StatCard
           title="Low Stock Items"
           value="12"
           change="-2.1%"
-          color="text-red-500"
+          Icon={AlertTriangle}
         />
 
       </div>

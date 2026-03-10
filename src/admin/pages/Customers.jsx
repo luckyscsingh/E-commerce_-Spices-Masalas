@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { Users, Zap, Star, User } from "lucide-react";
+import { Users, Zap, Star } from "lucide-react";
+import StatCard from "../components/StatCard";
 import AdminLayout from "../layout/AdminLayout";
-
-
-const [page, setPage] = useState(1)
-const rowsPerPage = 8
-
 
 const allCustomers = [
   {
@@ -54,6 +50,9 @@ export default function Customers() {
   const [tab, setTab] = useState("all");
   const [sort, setSort] = useState("recent");
 
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 3;
+
   const filtered =
     tab === "all"
       ? allCustomers
@@ -61,12 +60,12 @@ export default function Customers() {
         ? allCustomers.filter((c) => c.status === "VIP")
         : allCustomers.filter((c) => c.status === "INACTIVE");
 
-const start = (page - 1) * rowsPerPage
-const end = start + rowsPerPage
+  const totalPages = Math.ceil(filtered.length / rowsPerPage);
 
-const visibleCustomers = customers.slice(start, end)
+  const start = (page - 1) * rowsPerPage;
+  const end = start + rowsPerPage;
 
-const totalPages = Math.ceil(customers.length / rowsPerPage)
+  const paginatedCustomers = filtered.slice(start, end);
 
   return (
     <AdminLayout>
@@ -75,9 +74,10 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
             <h1 className="text-2xl font-bold">Customer Directory</h1>
-            <p className="text-sm text-gray-500">
-              Managing 12,540 registered spice enthusiasts
-            </p>
+            <span className="text-gray-500">
+              Showing {start + 1}-{Math.min(end, filtered.length)} of{" "}
+              {filtered.length} customers
+            </span>
           </div>
 
           <div className="flex flex-wrap gap-3">
@@ -85,7 +85,7 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
               Export CSV
             </button>
 
-            <button className="bg-[#d4a62a] text-white px-4 py-2 rounded-lg text-sm">
+            <button className="hover:bg-[#e6c15a] bg-[#d4a62a] text-white px-4 py-2 rounded-lg text-sm">
               + Add Customer
             </button>
           </div>
@@ -114,7 +114,10 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
           <div className="flex flex-wrap justify-between items-center border-b px-6 pt-4">
             <div className="flex gap-6 text-sm">
               <button
-                onClick={() => setTab("all")}
+                onClick={() => {
+                  setTab("all");
+                  setPage(1);
+                }}
                 className={`pb-3 ${
                   tab === "all"
                     ? "border-b-2 border-yellow-500 font-medium"
@@ -125,7 +128,10 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
               </button>
 
               <button
-                onClick={() => setTab("vip")}
+                onClick={() => {
+                  setTab("vip");
+                  setPage(1);
+                }}
                 className={`pb-3 ${
                   tab === "vip"
                     ? "border-b-2 border-yellow-500 font-medium"
@@ -136,7 +142,10 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
               </button>
 
               <button
-                onClick={() => setTab("inactive")}
+                onClick={() => {
+                  setTab("inactive");
+                  setPage(1);
+                }}
                 className={`pb-3 ${
                   tab === "inactive"
                     ? "border-b-2 border-yellow-500 font-medium"
@@ -158,8 +167,8 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
           </div>
 
           {/* TABLE */}
-          <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+          <div className="overflow-x-auto w-full border md:border-none">
+            <table className="w-full text-sm min-w-200">
               <thead className="bg-gray-50 text-gray-500 border-b">
                 <tr>
                   <th className="px-6 py-3 text-left">Customer</th>
@@ -168,12 +177,12 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
                   <th className="px-6 py-3 text-left">Orders</th>
                   <th className="px-6 py-3 text-left">Total Spent</th>
                   <th className="px-6 py-3 text-left">Last Active</th>
-                  <th className="px-6 py-3 text-left">Action</th>
+                  <th className="px-6 py-3 text-left pr-10">Action</th>
                 </tr>
               </thead>
 
               <tbody>
-                {visibleCustomers.map((c) => (
+                {paginatedCustomers.map((c) => (
                   <tr key={c.id} className="border-b hover:bg-gray-50">
                     <td className="px-6 py-4 font-medium">{c.name}</td>
 
@@ -219,17 +228,34 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
           {/* PAGINATION */}
           <div className="flex justify-between items-center p-4 text-sm">
             <span className="text-gray-500">
-              Showing 1-10 of 12,540 customers
+              Page {page} of {totalPages}
             </span>
 
+            {/* 🔧 CHANGED PAGINATION */}
+
+            {/* 🔧 CHANGED PAGINATION */}
+
             <div className="flex gap-2">
-              <button className="px-3 py-1 border rounded">‹</button>
-              <button className="px-3 py-1 bg-yellow-500 text-white rounded">
-                1
+              {/* PREVIOUS */}
+              <button
+                onClick={() => page > 1 && setPage(page - 1)}
+                className="px-3 py-1 border rounded"
+              >
+                ‹
               </button>
-              <button className="px-3 py-1 border rounded">2</button>
-              <button className="px-3 py-1 border rounded">3</button>
-              <button className="px-3 py-1 border rounded">›</button>
+
+              {/* CURRENT PAGE */}
+              <button className="px-3 py-1 bg-yellow-500 text-white rounded">
+                {page}
+              </button>
+
+              {/* NEXT */}
+              <button
+                onClick={() => page < totalPages && setPage(page + 1)}
+                className="px-3 py-1 border rounded"
+              >
+                ›
+              </button>
             </div>
           </div>
         </div>
@@ -261,21 +287,5 @@ const totalPages = Math.ceil(customers.length / rowsPerPage)
         </div>
       </div>
     </AdminLayout>
-  );
-}
-
-function StatCard({ title, value, change, Icon }) {
-  return (
-    <div className="bg-white border rounded-xl p-5 shadow-sm flex justify-between items-start">
-      <div>
-        <p className="text-gray-500 text-sm">{title}</p>
-        <h2 className="text-2xl font-bold mt-2">{value}</h2>
-      </div>
-
-      <div className="flex flex-col items-end">
-        <Icon className="text-yellow-500" size={22} />
-        <span className="text-green-600 text-xs mt-2">{change}</span>
-      </div>
-    </div>
   );
 }

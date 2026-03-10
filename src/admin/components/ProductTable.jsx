@@ -41,7 +41,7 @@ function statusBadge(status) {
 
 function ProductTable() {
   return (
-    <div className="bg-white rounded-2xl shadow-sm overflow-x-auto">
+    <div className="bg-white border rounded-2xl shadow-sm overflow-x-auto">
 
       <table className="w-full text-left">
 
