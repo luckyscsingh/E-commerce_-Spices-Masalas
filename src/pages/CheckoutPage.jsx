@@ -3,8 +3,10 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import cardamom from "../assets/greencardamom.jpg";
 import redchilli from "../assets/redchillipowder.jpg.webp";
+import { useNavigate } from "react-router-dom";
 
 export default function CheckoutPage() {
+  const navigate = useNavigate();
   return (
     <div className="bg-yellow-100/20 min-h-screen text-gray-900 flex flex-col">
 
@@ -172,11 +174,12 @@ export default function CheckoutPage() {
             </div>
 
           </div>
-
-          <button className="w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-4 rounded-full transition text-sm sm:text-base">
+          <button
+            onClick={() => navigate("/order-confirmation")}
+            className="w-full bg-yellow-600 hover:bg-yellow-700 text-white py-4 rounded-full font-semibold transition"
+          >
             Complete Purchase
           </button>
-
           <p className="text-xs text-gray-400 text-center mt-4">
             Secure checkout powered by SSL encryption
           </p>
