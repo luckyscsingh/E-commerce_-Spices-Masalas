@@ -5,6 +5,8 @@ import cardamom from "../assets/greencardamom.jpg";
 import redchilli from "../assets/redchillipowder.jpg.webp";
 import cumin from "../assets/cuminseeds.png.webp";
 import cinnamon from "../assets/ceyloncinnamon.jpg.webp";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function CartPage() {
     const { cartItems, removeFromCart, increaseQty, decreaseQty } = useCart();
@@ -30,38 +32,7 @@ export default function CartPage() {
         <div className="bg-[#f5f3ee] min-h-screen flex flex-col">
 
             {/* ================= NAVBAR ================= */}
-            <header className="bg-[#f5f3ee] border-b sticky top-0 z-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
-
-                    <Link to="/" className="flex items-center gap-2 font-semibold text-lg">
-                        <span className="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-black">
-                            ✿
-                        </span>
-                        SpiceHaven
-                    </Link>
-
-                    <nav className="hidden md:flex gap-8 text-gray-600">
-                        <Link to="/">Home</Link>
-                        <Link to="/products">Shop</Link>
-                        <Link to="/our-story">About</Link>
-                    </nav>
-
-                    <div className="flex items-center gap-4 sm:gap-5">
-                        <Search size={20} className="text-gray-600 cursor-pointer" />
-
-                        <Link to="/cart" className="relative">
-                            <ShoppingCart size={22} className="text-gray-700" />
-                            {cartCount > 0 && (
-                                <span className="absolute -top-2 -right-2 bg-yellow-500 text-xs text-white px-1.5 rounded-full">
-                                    {cartCount}
-                                </span>
-                            )}
-                        </Link>
-
-                        <User size={20} className="text-gray-600 cursor-pointer" />
-                    </div>
-                </div>
-            </header>
+            <Navbar cartCount={cartCount} />
 
             {/* ================= MAIN CONTENT ================= */}
             <div className="flex-grow">
@@ -226,22 +197,7 @@ export default function CartPage() {
             </div>
 
             {/* ================= FOOTER ================= */}
-            <footer className="bg-[#f3f1eb] border-t">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8 sm:py-10 text-center">
-
-                    <div className="flex items-center justify-center gap-2 text-yellow-600 font-semibold text-base sm:text-lg mb-2 sm:mb-3">
-                        <span className="w-6 h-6 sm:w-7 sm:h-7 bg-yellow-500 rounded-full flex items-center justify-center text-black text-xs sm:text-sm">
-                            ✿
-                        </span>
-                        Spices & Masalas
-                    </div>
-
-                    <p className="text-gray-500 text-xs sm:text-sm">
-                        © 2024 Spices & Masalas Co. Crafted for authentic flavor.
-                    </p>
-
-                </div>
-            </footer>
+           <Footer/>
 
         </div>
     );

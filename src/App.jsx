@@ -12,9 +12,12 @@ import TrackOrder from "./pages/TrackOrder";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
+import AdminRoutes from "./routes/AdminRoutes.jsx";
+
 function App() {
   return (
     <Router>
+
       <Routes>
         <Route element={<Layout />}></Route>
         <Route path="/" element={<Home />} />
@@ -29,7 +32,13 @@ function App() {
         <Route path="/track-order" element={<TrackOrder />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        {/* ADMIN ROUTES */}
+
+        <Route path="/admin/*" element={<AdminRoutes />} />
+
       </Routes>
+
     </Router>
   );
 }

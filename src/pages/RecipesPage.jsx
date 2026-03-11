@@ -1,5 +1,10 @@
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+
 export default function RecipesPage() {
   return (
+    <>
+    <Navbar/>
     
     <div className="min-h-screen bg-yellow-100/20 px-4 sm:px-6 py-10">
       
@@ -42,5 +47,8 @@ export default function RecipesPage() {
       </div>
 
     </div>
+    <Footer/>
+
+    </>
   );
 }

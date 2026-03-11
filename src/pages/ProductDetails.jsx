@@ -8,6 +8,8 @@ import redchilli from "../assets/redchilli.jpg";
 import cuminseeds from "../assets/cuminseeds.png.webp";
 import corianderpowder from "../assets/corianderpowder.jpg";
 import kashmirisaffron from "../assets/kashmirisaffron.jpg.avif";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export default function ProductDetails() {
   const { addToCart, cartItems } = useCart();
@@ -69,43 +71,9 @@ export default function ProductDetails() {
     <div className="bg-[#f5f3ee] min-h-screen">
 
       {/* ================= NAVBAR ================= */}
-      <header className="bg-[#f5f3ee] shadow-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="font-bold text-xl">SpiceHaven</h1>
 
-          <nav className="hidden md:flex gap-8 text-gray-700">
-            <Link to="/">Home</Link>
-            <Link to="/products" className="text-yellow-600 font-semibold">
-              Products
-            </Link>
-            <Link to="/recipes">Recipes</Link>
-            <Link to="/our-story">About</Link>
-          </nav>
-
-          <div className="flex items-center gap-4">
-            <div className="hidden md:flex bg-white px-4 py-2 rounded-full w-64">
-              <Search size={18} />
-              <input
-                className="ml-2 outline-none text-sm w-full bg-transparent"
-                placeholder="Search spices..."
-              />
-            </div>
-
-            <Link to="/cart" className="relative">
-              <ShoppingCart size={22} />
-
-              {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-yellow-500 text-xs text-white px-1.5 rounded-full">
-                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
-                </span>
-              )}
-            </Link>
-
-            <User size={22} />
-          </div>
-        </div>
-      </header>
-
+      <Navbar/>
+     
       {/* ================= HERO ================= */}
 <section className="bg-[#f4f1eb] py-10 md:py-16">
   <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -238,11 +206,8 @@ grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
 </section>
 
       {/* ================= FOOTER ================= */}
-      <footer className="mt-24 py-12 bg-yellow-200/20 text-center text-gray-500 text-sm">
-        <p className="font-semibold text-gray-700 mb-4">SpiceHaven</p>
-        <p>© 2024 SpiceHaven Premium Masalas. All rights reserved.</p>
-      </footer>
-
+      <Footer/>
+     
     </div>
   );
 }
