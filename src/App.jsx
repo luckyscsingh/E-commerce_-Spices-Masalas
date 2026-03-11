@@ -7,6 +7,8 @@ import RecipesPage from "./pages/RecipesPage";
 import KashmiriSaffronDetails from "./pages/KashmiriSaffronDetails.jsx";
 import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import OrderConfirmation from "./pages/OrderConfirmation";
+import TrackOrder from "./pages/TrackOrder";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/products" element={<ProductDetails />} />
         <Route path="/checkout" element={<CheckoutPage />} />
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+        <Route path="/track-order" element={<TrackOrder />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
