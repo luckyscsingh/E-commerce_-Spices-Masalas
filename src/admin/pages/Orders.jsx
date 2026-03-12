@@ -1,8 +1,26 @@
 import AdminLayout from "../layout/AdminLayout";
 import StatCard from "../components/StatCard";
 import { Package, Truck, CheckCircle } from "lucide-react";
+import { useState } from "react";
 
 const Orders = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [statusFilter, setStatusFilter] = useState("all");
+
+  const itemsPerPage = 3;
+
+  const filteredOrders =
+    statusFilter === "all"
+      ? orders
+      : orders.filter((order) => order.status === statusFilter);
+
+  const totalPages = Math.ceil(filteredOrders.length / itemsPerPage);
+
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentOrders = filteredOrders.slice(startIndex, endIndex);
+
   return (
     <AdminLayout>
       <div className="space-y-6 max-w-full overflow-hidden">
@@ -51,14 +69,56 @@ const Orders = () => {
         <div className="bg-white rounded-xl border shadow-sm">
           {/* Tabs */}
           <div className="flex flex-wrap gap-6 border-b px-6 pt-4 text-sm">
-            <button className="border-b-2 border-yellow-500 pb-3 font-medium">
+            <button
+              onClick={() => setStatusFilter("all")}
+              className={
+                statusFilter === "all"
+                  ? "text-black border-b-2 border-yellow-500 pb-3"
+                  : ""
+              }
+            >
               All Orders
             </button>
-
-            <button className="text-gray-500">Unfulfilled</button>
-            <button className="text-gray-500">Shipped</button>
-            <button className="text-gray-500">Delivered</button>
-            <button className="text-gray-500">Cancelled</button>
+            <button
+              onClick={() => setStatusFilter("unfulfilled")}
+              className={
+                statusFilter === "unfulfilled"
+                  ? "text-black border-b-2 border-yellow-500 pb-3"
+                  : ""
+              }
+            >
+              Unfulfilled
+            </button>
+            <button
+              onClick={() => setStatusFilter("shipped")}
+              className={
+                statusFilter === "shipped"
+                  ? "text-black border-b-2 border-yellow-500 pb-3"
+                  : ""
+              }
+            >
+              Shipped
+            </button>
+            <button
+              onClick={() => setStatusFilter("delivered")}
+              className={
+                statusFilter === "delivered"
+                  ? "text-black border-b-2 border-yellow-500 pb-3"
+                  : ""
+              }
+            >
+              Delivered
+            </button>
+            <button
+              onClick={() => setStatusFilter("cancelled")}
+              className={
+                statusFilter === "cancelled"
+                  ? "text-black border-b-2 border-yellow-500 pb-3"
+                  : ""
+              }
+            >
+              Cancelled
+            </button>
           </div>
 
           {/* Filters */}
@@ -90,7 +150,7 @@ const Orders = () => {
               </thead>
 
               <tbody>
-                {orders.map((order) => (
+                {currentOrders.map((order) => (
                   <tr key={order.id} className="border-b hover:bg-gray-50">
                     <td className="px-3 md:px-6 py-4 font-medium">
                       {order.id}
@@ -139,18 +199,30 @@ const Orders = () => {
 
           {/* PAGINATION */}
           <div className="flex items-center justify-center gap-4 p-6 text-sm">
-            <button className="text-gray-400">Previous</button>
-
-            <button className="w-8 h-8 rounded-full bg-yellow-500 text-white">
-              1
+            {/* Previous */}
+            <button
+              onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
+              className="text-gray-500 px-3 py-1 border rounded"
+            >
+              ‹
             </button>
 
-            <button>2</button>
-            <button>3</button>
-            <span>...</span>
-            <button>12</button>
+            {/* Current Page */}
+            <button className="w-8 h-8 rounded-full bg-yellow-500 text-white flex items-center justify-center">
+              {currentPage}
+            </button>
 
-            <button>Next</button>
+            {/* Next */}
+            <button
+              onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
+              className="text-gray-500 px-3 py-1 border rounded"
+            >
+              ›
+            </button>
+            <p className="text-sm text-gray-500">
+              Showing {startIndex + 1} to {Math.min(endIndex, orders.length)} of{" "}
+              {orders.length} orders
+            </p>
           </div>
         </div>
       </div>

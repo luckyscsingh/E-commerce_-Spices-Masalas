@@ -1,6 +1,45 @@
 import AdminLayout from "../layout/AdminLayout";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function AddProduct() {
+  const navigate = useNavigate();
+  const [product, setProduct] = useState({
+    name: "",
+    sku: "",
+    category: "",
+    price: "",
+    stock: "",
+  });
+
+  const handleSaveProduct = () => {
+    if (
+      !product.name ||
+      !product.category ||
+      !product.price ||
+      !product.stock
+    ) {
+      alert("Please fill all product fields");
+      return;
+    }
+    const existingProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+    const newProduct = {
+      id: Date.now(),
+      name: product.name,
+      category: product.category,
+      price: product.price,
+      qty: product.stock,
+      stock: product.stock > 0 ? "In Stock" : "Out of Stock",
+    };
+
+    const updatedProducts = [...existingProducts, newProduct];
+
+    localStorage.setItem("products", JSON.stringify(updatedProducts));
+
+    navigate("/admin/products");
+  };
+
   return (
     <AdminLayout>
       {/* TOPBAR */}
@@ -25,7 +64,10 @@ function AddProduct() {
           </button>
 
           {/* Save */}
-          <button className="px-5 py-2 rounded-lg bg-[#d4a62a] text-white font-medium">
+          <button
+            onClick={handleSaveProduct}
+            className="px-5 py-2 rounded-lg bg-[#d4a62a] text-white font-medium"
+          >
             Save Product
           </button>
 
@@ -58,19 +100,40 @@ function AddProduct() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="text-sm">Product Name</label>
-                <input className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500" />
+                <input
+                  value={product.name}
+                  onChange={(e) =>
+                    setProduct({ ...product, name: e.target.value })
+                  }
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
+                />
               </div>
 
               <div>
                 <label className="text-sm">SKU</label>
-                <input className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500" />
+                <input
+                  value={product.sku}
+                  onChange={(e) =>
+                    setProduct({ ...product, sku: e.target.value })
+                  }
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
+                />
               </div>
             </div>
 
             <div className="mt-4">
               <label className="text-sm">Category</label>
-              <select className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500">
-                <option>Select Category</option>
+              <select
+                value={product.category}
+                onChange={(e) =>
+                  setProduct({ ...product, category: e.target.value })
+                }
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
+              >
+                <option value="">Select Category</option>
+                <option value="Spices">Spices</option>
+                <option value="Powders">Powders</option>
+                <option value="Luxury">Luxury</option>
               </select>
             </div>
 
@@ -122,12 +185,22 @@ function AddProduct() {
             <div className="space-y-3">
               <div>
                 <label className="text-sm">Base Price ($)</label>
-                <input className="input" placeholder="0.00" />
+                <input
+                  className="border rounded-lg px-3 py-2 text-sm w-full sm:w-56"
+                  placeholder="0.00"
+                />
               </div>
 
               <div>
                 <label className="text-sm">Discount Price ($)</label>
-                <input className="input" placeholder="0.00" />
+                <input
+                  value={product.price}
+                  onChange={(e) =>
+                    setProduct({ ...product, price: e.target.value })
+                  }
+                  className="border rounded-lg px-3 py-2 text-sm w-full sm:w-56"
+                  placeholder="0.00"
+                />
               </div>
 
               <label className="flex items-center gap-2 mt-2 text-sm">
@@ -150,6 +223,10 @@ function AddProduct() {
               <div>
                 <label className="text-sm">Stock Quantity</label>
                 <input
+                  value={product.stock}
+                  onChange={(e) =>
+                    setProduct({ ...product, stock: e.target.value })
+                  }
                   className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm outline-none focus:border-yellow-500 focus:ring-1 focus:ring-yellow-500"
                   placeholder="0"
                 />

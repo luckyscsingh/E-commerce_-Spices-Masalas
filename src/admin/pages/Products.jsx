@@ -1,8 +1,16 @@
 import AdminLayout from "../layout/AdminLayout";
 import ProductTable from "../components/ProductTable";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function Products() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const savedProducts = JSON.parse(localStorage.getItem("products")) || [];
+
+    setProducts(savedProducts);
+  }, []);
   const navigate = useNavigate();
   return (
     <AdminLayout>

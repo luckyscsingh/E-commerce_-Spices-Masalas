@@ -231,10 +231,6 @@ export default function Customers() {
               Page {page} of {totalPages}
             </span>
 
-            {/* 🔧 CHANGED PAGINATION */}
-
-            {/* 🔧 CHANGED PAGINATION */}
-
             <div className="flex gap-2">
               {/* PREVIOUS */}
               <button
