@@ -92,7 +92,7 @@ const verifyPayment = asyncHandler(async (req, res) => {
     items,
     deliveryAddress: deliveryAddress || {},
     shippingAddress: deliveryAddress || {},
-    paymentMethod: "Razorpay",
+    paymentMethod: orderData.paymentMethod || "UPI",
     paymentStatus: "Paid",
     razorpayOrderId: razorpay_order_id,
     razorpayPaymentId: razorpay_payment_id,
@@ -121,6 +121,7 @@ const verifyPayment = asyncHandler(async (req, res) => {
     success: true,
     message: "Payment verified and order created successfully",
     order: {
+      _id: order._id,
       orderId: order.orderId,
       trackingId: order.trackingId,
       status: order.status,

@@ -59,6 +59,17 @@ const getProductById = asyncHandler(async (req, res) => {
 });
 
 /**
+ * @desc    Get all unique product categories
+ * @route   GET /api/products/categories
+ * @access  Public
+ */
+const getProductCategories = asyncHandler(async (req, res) => {
+  const categories = await Product.distinct("category");
+  const validCategories = categories.filter(c => c && c.trim() !== "");
+  res.json(validCategories);
+});
+
+/**
  * @desc    Create a new product (with Cloudinary image upload)
  * @route   POST /api/products
  * @access  Admin
@@ -237,6 +248,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 module.exports = {
   getAllProducts,
   getProductById,
+  getProductCategories,
   createProduct,
   updateProduct,
   deleteProduct,

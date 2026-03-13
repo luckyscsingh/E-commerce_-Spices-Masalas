@@ -7,11 +7,13 @@ const {
   createProduct,
   updateProduct,
   deleteProduct,
+  getProductCategories,
 } = require("../controllers/productController");
 
 const router = express.Router();
 
 // Public routes
+router.get("/categories", getProductCategories);
 router.get("/", getAllProducts);
 router.get("/:id", getProductById);
 

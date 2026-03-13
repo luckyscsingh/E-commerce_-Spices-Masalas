@@ -1,10 +1,7 @@
-const redis = require("../config/redis");
+const Cart = require("../models/Cart");
 const Product = require("../models/Product");
 const asyncHandler = require("../utils/asyncHandler");
 const AppError = require("../utils/AppError");
-
-const CART_PREFIX = "cart:";
-const CART_TTL = 60 * 60 * 24 * 7; // 7 days
 
 /**
  * @desc    Add item to cart
@@ -12,44 +9,50 @@ const CART_TTL = 60 * 60 * 24 * 7; // 7 days
  * @access  Private
  */
 const addToCart = asyncHandler(async (req, res) => {
-  if (!redis) {
-    throw new AppError("Cart service is temporarily unavailable", 503);
-  }
-
   const { productId, quantity = 1 } = req.body;
 
   if (!productId) {
     throw new AppError("Product ID is required", 400);
   }
 
-  // Validate product exists
   const product = await Product.findById(productId);
   if (!product) {
     throw new AppError("Product not found", 404);
   }
 
-  const cartKey = `${CART_PREFIX}${req.user._id}`;
-
-  // Store as JSON string in a Redis hash (field = productId, value = cart item data)
-  const cartItem = JSON.stringify({
-    productId: product._id,
-    name: product.name,
-    price: product.discountPrice || product.basePrice,
-    image: product.image,
-    quantity: parseInt(quantity, 10),
-  });
-
-  await redis.hset(cartKey, productId, cartItem);
-  await redis.expire(cartKey, CART_TTL);
-
-  // Get updated cart
-  const cart = await redis.hgetall(cartKey);
-  const items = Object.values(cart).map((item) => JSON.parse(item));
+  let cart = await Cart.findOne({ user: req.user._id });
+  
+  if (!cart) {
+    cart = await Cart.create({
+      user: req.user._id,
+      items: [{
+        productId: product._id,
+        name: product.name,
+        price: product.discountPrice || product.basePrice,
+        image: product.image,
+        quantity: parseInt(quantity, 10),
+      }]
+    });
+  } else {
+    const itemIndex = cart.items.findIndex(item => item.productId.toString() === productId);
+    if (itemIndex > -1) {
+      cart.items[itemIndex].quantity = parseInt(quantity, 10);
+    } else {
+      cart.items.push({
+        productId: product._id,
+        name: product.name,
+        price: product.discountPrice || product.basePrice,
+        image: product.image,
+        quantity: parseInt(quantity, 10),
+      });
+    }
+    await cart.save();
+  }
 
   res.status(200).json({
     success: true,
     message: "Item added to cart",
-    cart: items,
+    cart: cart.items,
   });
 });
 
@@ -59,27 +62,20 @@ const addToCart = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const removeFromCart = asyncHandler(async (req, res) => {
-  if (!redis) {
-    throw new AppError("Cart service is temporarily unavailable", 503);
-  }
-
   const { productId } = req.params;
-  const cartKey = `${CART_PREFIX}${req.user._id}`;
-
-  const removed = await redis.hdel(cartKey, productId);
-
-  if (!removed) {
-    throw new AppError("Item not found in cart", 404);
+  
+  const cart = await Cart.findOne({ user: req.user._id });
+  if (!cart) {
+    throw new AppError("Cart not found", 404);
   }
 
-  // Get updated cart
-  const cart = await redis.hgetall(cartKey);
-  const items = Object.values(cart).map((item) => JSON.parse(item));
+  cart.items = cart.items.filter(item => item.productId.toString() !== productId);
+  await cart.save();
 
   res.json({
     success: true,
     message: "Item removed from cart",
-    cart: items,
+    cart: cart.items,
   });
 });
 
@@ -89,17 +85,15 @@ const removeFromCart = asyncHandler(async (req, res) => {
  * @access  Private
  */
 const getCart = asyncHandler(async (req, res) => {
-  if (!redis) {
-    throw new AppError("Cart service is temporarily unavailable", 503);
+  let cart = await Cart.findOne({ user: req.user._id });
+  
+  if (!cart) {
+    cart = await Cart.create({ user: req.user._id, items: [] });
   }
-
-  const cartKey = `${CART_PREFIX}${req.user._id}`;
-  const cart = await redis.hgetall(cartKey);
-  const items = Object.values(cart).map((item) => JSON.parse(item));
 
   res.json({
     success: true,
-    cart: items,
+    cart: cart.items,
   });
 });
 
